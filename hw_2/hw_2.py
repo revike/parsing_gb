@@ -89,6 +89,8 @@ def get_data(**kwargs):
                     salary_data['min_salary'] = salary
                     salary_data['average'] = salary
                     salary_data['max_salary'] = salary
+            else:
+                salary_data = None
 
             vacancy_data['name'] = vacancy_name
             vacancy_data['salary'] = salary_data
