@@ -1,8 +1,6 @@
 import json
-
-from bs4 import BeautifulSoup as bS
 import requests
-from pprint import pprint
+from bs4 import BeautifulSoup as bS
 
 
 def get_page(text: str):
@@ -76,6 +74,7 @@ def get_data(**kwargs):
             if vacancy_salary:
                 vacancy_salary = vacancy_salary.getText()
                 salary_split = vacancy_salary.split(' ')
+                currency = salary_split[-1]
                 try:
                     min_salary = float(
                         ''.join(salary_split[0].split('\u202f')))
@@ -89,6 +88,7 @@ def get_data(**kwargs):
                     salary_data['min_salary'] = salary
                     salary_data['average'] = salary
                     salary_data['max_salary'] = salary
+                salary_data['currency'] = currency
             else:
                 salary_data = None
 
@@ -118,7 +118,8 @@ def run(text):
         page=pages['page']
     )
     save_data(data, text)
-    pprint(data)
+    # pprint(data)
+    return data
 
 
 if __name__ == '__main__':
